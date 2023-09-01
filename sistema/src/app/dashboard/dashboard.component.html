@@ -16,11 +16,10 @@
 
   <ng-container *ngIf="isEmployee; else customerLinks">
     <div class="container mt-4 flex-grow-1">
-      <div *ngFor="let order of listOpenOrder" class="border rounded p-3 mb-3"
-        [ngClass]="{'background-orange': order.status === 'Pago', 'background-red': order.status === 'Rejeitado' || order.status === 'Cancelado'}">
+      <div *ngFor="let order of listOpenOrder" class="border rounded p-3 mb-3">
         <div class="row">
           <h2 class="col md-3">Pedido {{ order.id }}</h2>
-          <button *ngIf="order.status === 'Em Aberto'" class="col col-lg-2 btn btn-warning">Recolher</button>
+          <button class="col col-lg-2 btn btn-warning" (click)="recolherPedido(order)">Recolher</button>
         </div>
 
         <table class="table table-striped">
@@ -29,6 +28,7 @@
               <th>Status</th>
               <th>Valor</th>
               <th>Prazo</th>
+              <th>Data do Pedido</th>
             </tr>
           </thead>
           <tbody>
@@ -36,6 +36,7 @@
               <td>{{ order.status }}</td>
               <td>R$ {{ order.value }},00</td>
               <td>{{ order.time }} minutos</td>
+              <td>{{ order.orderDate }} </td>
             </tr>
           </tbody>
         </table>
